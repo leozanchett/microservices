@@ -1,0 +1,19 @@
+python -m venv planetary_api
+
+# ativar o ambiente virtual
+-- source planetary_venv/bin/activate
+-- .\Activate.ps1
+
+# desativar o ambiente virtual
+deactivate
+
+
+# rodar o projeto pelo ambiente virtual
+python app.py
+
+
+
+Include: Essa pasta contém os arquivos de cabeçalho necessários para compilar programas Python.
+Lib: Essa pasta contém as bibliotecas Python necessárias para executar programas Python.
+Scripts: Essa pasta contém os scripts Python que podem ser executados diretamente do terminal ou prompt de comando.
+pyenv.cfg: Esse arquivo contém as configurações do ambiente virtual, como o caminho para o Python e as bibliotecas instaladas.
