@@ -11,6 +11,14 @@ class Planet(db.Model):
     radius = Column(Float)
     distance = Column(Float)
 
+    def __init__(self, planet_name: str, planet_type: str, home_star: str, mass: float, radius: float, distance: float):
+        self.planet_name = planet_name
+        self.planet_type = planet_type
+        self.home_star = home_star
+        self.mass = mass
+        self.radius = radius
+        self.distance = distance
+
     class PlanetSchema(ma.Schema):
         class Meta:
             fields = ('planet_id', 'planet_name', 'planet_type', 'home_star', 'mass', 'radius', 'distance')
