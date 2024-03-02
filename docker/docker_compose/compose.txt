@@ -1,0 +1,60 @@
+# Versão do compose
+docker compose version
+
+# Criar um arquivo docker-compose.yml
+touch docker-compose.yaml
+echo. > docker-compose.yaml
+
+# Instalar no linux
+sudo apt-get install docker-compose
+
+# Subir o container
+docker-compose up -d
+# Subir o container e recriar a imagem
+docker-compose up -d --build
+
+# Parar o container
+docker-compose down
+
+# Variáveis de ambiente
+docker compose run web env
+
+# Para os containers, mas não remove
+docker compose stop
+
+# Inicia os containers
+docker compose start
+
+# Remover os containers e os volumes
+docker compose down --volumes
+
+# Todos os comandos do docker-compose
+docker compose --help
+
+# Enviroinment variables
+https://docs.docker.com/compose/environment-variables/set-environment-variables/
+
+docker-compose run -e FLASK_DEBUG="false" web
+
+# Subir apenas profiles especificos
+docker compose --profile debug up -d
+
+# Comando usado para construir o serviço web definido no seu arquivo compose.yml
+docker-compose build web
+
+# Este comando é usado para iniciar o serviço web
+# --no-deps: Isso significa que o Docker Compose não iniciará os serviços dos quais web depende. 
+# Normalmente, se você tem outros serviços listados sob a chave depends_on no serviço web, o Docker Compose iniciará esses serviços primeiro. Mas com --no-deps, o Docker Compose ignorará essas dependências e iniciará apenas o serviço web
+docker compose up --no-deps -d web
+
+# Secrets
+https://docs.docker.com/compose/use-secrets/
+
+# Verificar as redes criadas
+docker network ls
+
+# Excluir uma rede
+docker network rm <network_name>
+
+# Excluir todas as redes
+docker network prune

@@ -1,0 +1,51 @@
+name: a-good-example 
+
+networks:
+  arede:
+    driver: bridge # O driver de rede que será usado para a rede. O padrão é bridge.
+    name: minha-rede # O nome da rede. O nome é obrigatório se o driver de rede for bridge.
+    #external: true # Se a rede é compartilhada com outros projetos. O padrão é false.
+  foorede:
+    driver: bridge
+    name: minha-rede-foo
+
+services:
+  foo:
+    image: busybox
+    command: echo "I'm running ${COMPOSE_PROJECT_NAME}"
+    profiles: [debug]
+    networks: [foorede]
+
+  web:
+    build: .
+    ports:
+      - "8000:5000"
+    volumes:
+      - .:/code
+    env_file:
+      - path: .env
+        required: true
+    environment:
+      FLASK_DEBUG: ${FLASK_DEBUG}
+    profiles: [backend, debug]
+    depends_on: [redis]
+    networks: [arede]
+    develop:
+      watch:
+        - action: sync
+          path: . # O caminho para o diretório que será sincronizado com o contêiner.
+          target: /code  # O caminho no contêiner onde o diretório será sincronizado.
+          ignore:
+            - .git
+            - .vscode
+            - .pytest_cache
+        - action: rebuild
+          path: Dockerfile
+        - action: sync+restart
+          path: .env
+          target: /code/.env
+
+  redis:
+    image: "redis:alpine"
+    profiles: [backend]
+    networks: [arede]
