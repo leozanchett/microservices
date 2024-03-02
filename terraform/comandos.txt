@@ -1,0 +1,11 @@
+# Inicia terraform
+terraform init
+
+# Formata codigo
+terraform fmt
+
+# Aplica alterações
+terraform apply
+
+# Remove recursos
+terraform destroy
